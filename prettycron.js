@@ -21,12 +21,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ////////////////////////////////////////////////////////////////////////////////////
 
-if ((!moment || !later) && (typeof require !== 'undefined')) {
-  var moment = require('moment');
-  var later = require('later');
-}
-
-(function() {
+define(['moment', 'later'], function(moment, later) {
 
   /*
    * For an array of numbers, e.g. a list of hours in a schedule,
@@ -181,7 +176,7 @@ if ((!moment || !later) && (typeof require !== 'undefined')) {
 
   /*
    * Given a cronspec, return the next run date as a moment
-   * (useful for the getNext 
+   * (useful for the getNext
    */
   var getNextMoment = function(cronspec, sixth) {
     var schedule = later.parse.cron(cronspec, sixth);
@@ -205,4 +200,6 @@ if ((!moment || !later) && (typeof require !== 'undefined')) {
   global_obj.getNext = getNext;
   global_obj.getNextDate = getNextDate;
 
-}).call(this);
+  return global_obj;
+
+});
